@@ -3,7 +3,6 @@ library(edarf)
 
 set.seed(1987)
 
-cutoff <- 3L
 nperm <- 2L
 n <- 50
 
@@ -19,19 +18,22 @@ df_multi <- data.frame("yr" = df_regr$y, "yc" = df_classif$y, X1, X2, X3)
 library(randomForest)
 library(randomForestSRC)
 library(party)
+library(ranger)
 
 fits_regr <- list(
   randomForest(y ~ ., df_regr, proximity = TRUE),
   randomForest(df_regr[, -which(colnames(df_regr) == "y")], df_regr$y, proximity = TRUE),
   cforest(y ~ ., df_regr, controls = cforest_control(mtry = 1)),
-  rfsrc(y ~ ., df_regr, proximity = "inbag")
+  rfsrc(y ~ ., df_regr, proximity = "inbag"),
+  ranger(y ~ ., df_regr, write.forest = TRUE)
 )
 
 fits_classif <- list(
   randomForest(y ~ ., df_classif, proximity = TRUE),
   randomForest(df_classif[, -which(colnames(df_classif) == "y")], df_classif$y, proximity = TRUE),
   cforest(y ~ ., df_classif, controls = cforest_control(mtry = 1)),
-  rfsrc(y ~ ., df_classif, proximity = "inbag")
+  rfsrc(y ~ ., df_classif, proximity = "inbag"),
+  ranger(y ~ ., df_classif, write.forest = TRUE)
 )
 
 fits_multi <- list(
@@ -39,4 +41,3 @@ fits_multi <- list(
 )
 
 test_check("edarf")
-

@@ -1,14 +1,13 @@
 ![](https://travis-ci.org/zmjones/edarf.svg) ![](http://www.r-pkg.org/badges/version/edarf)
+![](http://cranlogs.r-pkg.org/badges/edarf)
 [![DOI](https://zenodo.org/badge/23669422.svg)](https://zenodo.org/badge/latestdoi/23669422)
 [![status](http://joss.theoj.org/papers/d29df349c8450ef958c0fde5bf164371/status.svg)](http://joss.theoj.org/papers/d29df349c8450ef958c0fde5bf164371)
 
 Functions useful for exploratory data analysis using random forests.
 
-This package extends the functionality of random forests fit by [party](https://CRAN.R-project.org/package=party) (multivariate, regression, and classification), [randomForestSRC](https://CRAN.R-project.org/package=randomForestSRC) (regression, classification, and survival), and [randomForest](https://CRAN.R-project.org/package=randomForest) (regression and classification).
+This package extends the functionality of random forests fit by [party](https://CRAN.R-project.org/package=party) (multivariate, regression, and classification), [randomForestSRC](https://CRAN.R-project.org/package=randomForestSRC) (regression and classification,), [randomForest](https://CRAN.R-project.org/package=randomForest) (regression and classification), and [ranger](https://cran.r-project.org/package=ranger) (classification and regression).
 
 The subdirectory `pkg` contains the actual package. The package can be installed with [devtools](https://cran.r-project.org/package=devtools).
-
-Documentation of functions as well as a vignette can be found [here](http://zmjones.github.io/edarf/).
 
 ```{r}
 devtools::install_github("zmjones/edarf", subdir = "pkg")

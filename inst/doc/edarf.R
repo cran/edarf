@@ -5,48 +5,36 @@ knitr::opts_chunk$set(error = TRUE)
 library(edarf)
 
 data(iris)
-library(randomForest)
-fit <- randomForest(Species ~ ., iris)
-pd <- partial_dependence(fit, data = iris, var = "Petal.Width")
+library(party)
+fit <- cforest(Species ~ ., iris, controls = cforest_unbiased(mtry = 2))
+pd <- partial_dependence(fit, vars = "Petal.Width", n = c(10, 25))
 print(pd)
 
 ## ---- fig.width = 8, fig.height = 4--------------------------------------
 plot_pd(pd)
 
 ## ---- fig.width = 8, fig.height = 4--------------------------------------
-pd_list <- partial_dependence(fit, data = iris, c("Petal.Width", "Petal.Length"), interaction = FALSE)
+pd_list <- partial_dependence(fit, c("Petal.Width", "Petal.Length"), n = c(10, 25), interaction = FALSE)
 plot_pd(pd_list)
 
 ## ---- fig.width = 8, fig.height = 8--------------------------------------
-pd_int <- partial_dependence(fit, data = iris, c("Sepal.Length", "Sepal.Width"), interaction = TRUE)
-plot_pd(pd_int, facet = "Sepal.Width")
+pd_int <- partial_dependence(fit, c("Petal.Length", "Petal.Width"), n = c(10, 25), interaction = TRUE)
+plot_pd(pd_int)
 
 ## ---- fig.width = 8, fig.height = 5--------------------------------------
-imp <- variable_importance(fit, var = colnames(iris)[-5],
-  type = "aggregate", nperm = 2, data = iris)
+imp <- variable_importance(fit, nperm = 10)
 plot_imp(imp)
 
-## ---- fig.width = 8, fig.height = 5--------------------------------------
-imp_class <- variable_importance(fit, var = colnames(iris)[-5],
-  type = "local", nperm = 2, data = iris)
-plot_imp(imp_class)
-
-## ---- fig.width = 8, fig.height = 6--------------------------------------
-fit <- randomForest(Fertility ~ ., data = swiss, proximity = TRUE)
-imp_local <- variable_importance(fit, var = colnames(swiss)[-1], type = "local",
-  data = swiss)
-plot_imp(imp_local)
-
 ## ---- fig.width = 8, fig.height = 8--------------------------------------
-fit <- randomForest(Species ~ ., iris, proximity = TRUE)
+fit <- cforest(Species ~ ., iris, control = cforest_unbiased(mtry = 2))
 prox <- extract_proximity(fit)
 pca <- prcomp(prox, scale = TRUE)
 plot_prox(pca, color = iris$Species, color_label = "Species", size = 2)
 
 ## ---- fig.width = 8, fig.height = 5--------------------------------------
-fit <- randomForest(hp ~ ., mtcars)
-pred <- predict(fit, newdata = mtcars, OOB = TRUE)
-plot_pred(pred, mtcars$hp,
-           outlier_idx = which(abs(pred - mtcars$hp) > .5 * sd(mtcars$hp)),
-           labs = row.names(mtcars))
+fit <- cforest(Fertility ~ ., swiss)
+pred <- as.numeric(predict(fit, newdata = swiss))
+plot_pred(pred, swiss$Fertility,
+  outlier_idx = which((pred - swiss$Fertility)^2 > var(swiss$Fertility)),
+  labs = row.names(swiss))
 
