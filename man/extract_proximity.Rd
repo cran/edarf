@@ -22,13 +22,12 @@ Extracts proximity matrices from random forest objects from the party, randomFor
 \examples{
 library(randomForest)
 
-fit <- randomForest(hp ~ ., mtcars, proximity = TRUE)
+fit = randomForest(hp ~ ., mtcars, proximity = TRUE)
 extract_proximity(fit)
 
-fit <- randomForest(Species ~ ., iris, proximity = TRUE)
+fit = randomForest(Species ~ ., iris, proximity = TRUE)
 extract_proximity(fit)
 }
 \seealso{
 \code{\link{plot_prox}} for plotting principal components of proximity matrices.
 }
-

@@ -36,10 +36,9 @@ Plot predicted versus observed values
 \examples{
 library(randomForest)
 library(edarf)
-fit <- randomForest(hp ~ ., mtcars)
-pred <- predict(fit, newdata = mtcars)
+fit = randomForest(hp ~ ., mtcars)
+pred = predict(fit, newdata = mtcars)
 plot_pred(pred, mtcars$hp,
   outlier_idx = which(abs(pred - mtcars$hp) > .5 * sd(mtcars$hp)),
   labs = row.names(mtcars))
 }
-

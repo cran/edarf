@@ -28,7 +28,7 @@ Computes local or aggregate variable importance for a set of predictors from a f
 \examples{
 library(randomForest)
 data(iris)
-fit <- randomForest(Species ~ ., iris)
+fit = randomForest(Species ~ ., iris)
 variable_importance(fit, nperm = 2, data = iris)
 }
 \references{
@@ -37,4 +37,3 @@ Breiman, Leo. "Random forests." Machine learning 45.1 (2001): 5-32.
 \seealso{
 \code{\link{plot_imp}} for plotting the results of \code{variable_importance}.
 }
-

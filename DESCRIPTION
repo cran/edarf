@@ -1,6 +1,6 @@
 Package: edarf
-Version: 1.1.0
-Date: 2016-11-29
+Version: 1.1.1
+Date: 2017-03-05
 Title: Exploratory Data Analysis using Random Forests
 Description: Functions useful for exploratory data analysis
     using random forests which can be used to compute multivariate partial
@@ -18,9 +18,9 @@ Suggests: party, randomForest, randomForestSRC, ranger, testthat,
         rmarkdown, knitr
 LazyData: true
 BugReports: https://github.com/zmjones/edarf
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2016-11-30 17:48:14 UTC; zmjones
+Packaged: 2017-03-06 03:27:45 UTC; zmjones
 Repository: CRAN
-Date/Publication: 2016-11-30 20:03:53
+Date/Publication: 2017-03-06 08:28:57
